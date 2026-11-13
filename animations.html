@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+  animations.html  -  the ANIMATED CONCEPTS page
+
+  The brief asks for at least 3 different animated concepts. This page shows:
+    1. Animated text      (typing effect, JavaScript + CSS)
+    2. Hover effects      (CSS transitions)
+    3. Skill indicators   (animated progress bars, JavaScript + CSS)
+  Each demo has a short "How it works" note for the practical demonstration.
+  The head, navigation and footer are the same as on the other pages (see index.html).
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Animated concepts used on Kalifabina's portfolio: typing text, hover effects and animated skill bars.">
+  <meta name="author" content="blessings S Phiri">
+  <title>blessings S Phiri | Animated Concepts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="page" id="top">
+
+    <header>
+      <nav class="pill" aria-label="Main navigation">
+        <div class="tabs">
+          <a href="index.html">home</a>
+          <a href="about.html">about</a>
+          <a href="projects.html">projects</a>
+          <a href="animations.html" class="active" aria-current="page">animated concepts</a>
+        </div>
+      </nav>
+    </header>
+
+    <div class="wrap">
+
+      <div class="page-title">
+        <h1>Animated concepts</h1>
+        <p>Three small animations used across this site. Each one has a short note on how it works.</p>
+      </div>
+
+      <!-- ===================== 1. ANIMATED TEXT (typing effect) =====================
+           The same data-words idea as on the Home page. script.js types each phrase,
+           pauses, deletes it and moves on. The cursor is a CSS animation. -->
+      <section class="block" id="typing">
+        <h2>1. Animated text</h2>
+        <div class="typing-demo">
+          I am a <span class="typed-text typed" data-words='["Future Software Engineer", "Web Developer", "Computer Science Student", "Technology Enthusiast"]'>Web Developer</span>
+        </div>
+        <h6>How it works</h6>
+        <p>JavaScript adds one letter at a time with <strong>setTimeout</strong>, waits, deletes the letters and moves to the next phrase. The blinking cursor is a CSS <em>keyframe</em> animation on the right border.</p>
+      </section>
+
+      <!-- ===================== 2. HOVER EFFECTS =====================
+           Move the mouse over each item. All use CSS :hover with transition (no JavaScript). -->
+      <section class="block" id="hover">
+        <h2>2. Hover effects</h2>
+        <p>Move your mouse over (or tap) each card and button.</p>
+        <div class="grid">
+
+          <!-- Effect 1: the card lifts and grows, its shadow gets bigger (.card:hover in the CSS) -->
+          <div class="card">
+            <h4>Lift and grow</h4>
+            <p>The card moves up and scales slightly while its shadow gets bigger.</p>
+          </div>
+
+          <!-- Effect 2: a hidden black panel slides up from the bottom (.reveal-card in the CSS).
+               Note: "reveal-card" is a different thing from the scroll "reveal" class. -->
+          <div class="card reveal-card">
+            <h4>Hidden info</h4>
+            <p>Hover to see more.</p>
+            <div class="extra">Surprise! This panel slides up using <strong>transform</strong> and a CSS transition.</div>
+          </div>
+
+          <!-- Effect 3: the picture zooms inside the card (.card:hover .shot in the CSS).
+               The whole card is a link, so the card itself is clickable. -->
+          <a class="card" href="projects.html">
+            <h4>Zoom image</h4>
+            <img class="shot" src="images/project1.jpg" alt="Project screenshot that zooms when you hover over the card" width="800" height="500" style="border-radius:12px;">
+          </a>
+        </div>
+
+        <!-- Effect 4: button hover (.btn:hover) -->
+        <div class="btn-row" style="justify-content:flex-start;">
+          <a class="btn" href="projects.html">Button hover</a>
+          <a class="btn ghost" href="about.html">Ghost button</a>
+        </div>
+        <h6>How it works</h6>
+        <p>All of these use the <strong>:hover</strong> selector together with <strong>transition</strong>, so the change glides instead of jumping.</p>
+      </section>
+
+      <!-- ===================== 3. ANIMATED SKILL INDICATORS =====================
+           Each skill = a label + a grey bar with a black fill inside.
+           data-level="90" is the percentage. script.js reads it and sets the fill width
+           when the bar is on screen; CSS transition makes it grow smoothly.
+           It also resets when scrolled away, so it replays scrolling up OR down.
+           TODO: change the percentages to what honestly fits you. -->
+      <section class="block" id="skills">
+        <h2>3. Skill indicators</h2>
+
+        <div class="skill">
+          <div class="skill-top"><span>HTML &amp; CSS</span><span>90%</span></div>
+          <div class="bar" data-level="90"><span></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>JavaScript / TypeScript</span><span>85%</span></div>
+          <div class="bar" data-level="85"><span></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>React</span><span>85%</span></div>
+          <div class="bar" data-level="85"><span></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>Node.js</span><span>75%</span></div>
+          <div class="bar" data-level="75"><span></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>Python</span><span>75%</span></div>
+          <div class="bar" data-level="75"><span></span></div>
+        </div>
+        <div class="skill">
+          <div class="skill-top"><span>SQL &amp; databases</span><span>70%</span></div>
+          <div class="bar" data-level="70"><span></span></div>
+        </div>
+
+        <h6>How it works</h6>
+        <p>Every bar starts at width 0. When it scrolls into view, JavaScript reads its <strong>data-level</strong> and sets the width, and a CSS transition grows it smoothly.</p>
+      </section>
+
+    </div>
+
+    <footer>
+      <hr>
+      <div class="foot-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="animations.html">Animated Concepts</a>
+        <a href="#top">Back to top &uarr;</a>
+      </div>
+      <p>&copy; <span id="year">2026</span> blessings S Phiri &middot; ahfinashakerr</p>
+    </footer>
+
+  </main>
+</body>
+</html>

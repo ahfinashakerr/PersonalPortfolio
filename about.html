@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!--
+  about.html  -  the ABOUT ME page
+
+  Sections on this page (they match the brief, A to F):
+    A. Personal introduction     D. Interests and hobbies
+    B. Education (a table)       E. Career aspirations (lists)
+    C. Technical skills (a list) F. Contact information
+
+  The <head>, header/navigation and footer work exactly like in index.html
+  (see the long comments there). Only the parts that are different are explained here.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="About blesings S  Phiri: education, technical skills, interests and career goals.">
+  <meta name="author" content="blessings S Phiri">
+  <title>blessings S Phiri | About Me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="page" id="top">
+
+    <!-- Navigation: same as every page. "active" is now on the "about" link. -->
+    <header>
+      <nav class="pill" aria-label="Main navigation">
+        <div class="tabs">
+          <a href="index.html">home</a>
+          <a href="about.html" class="active" aria-current="page">about</a>
+          <a href="projects.html">projects</a>
+          <a href="animations.html">animated concepts</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- .wrap keeps the content in a centred column of readable width (see style.css) -->
+    <div class="wrap">
+
+      <!-- PAGE TITLE AREA -->
+      <div class="page-title">
+        <h1>About me</h1>
+        <p>A bit about who I am, where I study, what I can do and where I'm heading.</p>
+
+        <!-- SECTION LINKS (brief requirement: "links connecting sections within a page").
+             href="#education" jumps to the element on THIS page that has id="education".
+             Smooth scrolling is turned on in the CSS. -->
+        <nav class="jump" aria-label="Jump to a section">
+          <a href="#intro">Introduction</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <a href="#interests">Interests</a>
+          <a href="#aspirations">Aspirations</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+
+      <!-- ===================== A. PERSONAL INTRODUCTION =====================
+           id="intro" is the "name" the jump link above points to. -->
+      <section class="block" id="intro">
+        <!-- <h2> = a section heading (second level, under the h1) -->
+        <h2>Who I am</h2>
+        <p>Hi there, I'm <strong>blessings S Phiri</strong>.</p>
+
+        <!-- TEXT FORMATTING used here:
+             <em> = italic emphasis, <strong> = bold, <u> = underline -->
+        <p>
+          I'm a software developer and <em>third-year</em> Computer Science student in Malawi,
+          graduating in <u>2027</u>. I build frontend and systems software with React, TypeScript,
+          Node.js and Python.
+        </p>
+
+        <p>
+          Right now I'm interning at the
+          <!-- TODO: here is the DCA reconcilliatoin system .
+               class="txt-link" gives it the thin underline style. -->
+          <a class="txt-link" href="#">Department of Civil Aviation</a>
+          in Lilongwe, where I handle IT support and build tools for aviation customer statements,
+          including a payment reconciliation system.<br>
+          <!-- <br> above = line break: new line INSIDE the same paragraph.
+               A new <p> would add a bigger gap and starts a new paragraph. -->
+          Outside of that i like building task automation systems,Some of  these systems are:
+          loan dashboards, marketing sites, and a subscription accounting app for people ready to leave Excel behind.
+        </p>
+        <p>I like turning messy, manual work into clean software that people actually enjoy using.</p>
+
+        <!-- CLICKABLE IMAGE #2: the photo is wrapped in a link to the Projects page.
+             style="..." is INLINE CSS (CSS written directly on one element, for a one-off style). -->
+        <a href="projects.html" aria-label="See my projects">
+          <img src="images/profile.jpg" alt="Blessings S phiri at work" width="120" height="120" style="border-radius:18px; object-fit:cover; display:block;">
+        </a>
+        <hr>
+      </section>
+
+      <!-- ===================== B. EDUCATIONAL BACKGROUND (HTML TABLE) =====================
+           A table has: <table> (the whole thing), <thead> (heading row), <tbody> (data rows),
+           <tr> (a row), <th> (a heading cell) and <td> (a normal cell).
+           .table-wrap lets it scroll sideways on tiny phones. -->
+      <section class="block" id="education">
+        <h2>Educational background</h2>
+        <div class="table-wrap">
+          <table>
+            <!-- <caption> = a title for the table (good for accessibility) -->
+            <caption>My education so far</caption>
+            <thead>
+              <tr>
+                <!-- scope="col" tells screen readers this header describes the column below it -->
+                <th scope="col">Institution</th>
+                <th scope="col">Qualification</th>
+                <th scope="col">Programme of study</th>
+                <th scope="col">Period</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- TODO: put your real university and school names and years.
+                   &ndash; shows a dash "–" between the years. -->
+              <tr>
+                <td>DMI UNIVERSITY MANGOCHI, Malawi</td>
+                <td>Bachelor's degree (in progress)</td>
+                <td>Computer Science</td>
+                <td>2024 &ndash; 2027</td>
+              </tr>
+              <tr>
+                <td>William Murry Secondary School, Malawi</td>
+                <td>MSCE</td>
+                <td>Secondary education</td>
+                <td>2021 &ndash; 2024</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================== C. TECHNICAL SKILLS (UNORDERED LIST) =====================
+           <ul> = unordered list (bullet points). Each item is an <li> (list item).
+           Use <ul> when the ORDER doesn't matter. (7 skills here; the brief needs at least 5.) -->
+      <section class="block" id="skills">
+        <h2>Technical skills</h2>
+        <ul class="list">
+          <li><strong>HTML, CSS and JavaScript</strong> for responsive websites</li>
+          <li><strong>React and TypeScript</strong> for frontend apps and dashboards</li>
+          <li><strong>Node.js and Express</strong> for backend APIs</li>
+          <li><strong>Python</strong> for scripts, data cleaning and desktop apps</li>
+          <li><strong>Java (Spring Boot)</strong> for web applications</li>
+          <li><strong>SQL and SQLite</strong> for database design and management</li>
+          <li><strong>Electron</strong> for cross platform desktop software</li>
+        </ul>
+        <!-- Link to a SPECIFIC SECTION on ANOTHER page: animations.html + #skills -->
+        <p>Want to see these as bars? Check the <a class="txt-link" href="animations.html#skills">animated skill indicators</a>.</p>
+      </section>
+
+      <!-- ===================== D. INTERESTS AND HOBBIES =====================
+           Two columns (.two-col uses CSS Grid). <h4> = a smaller sub-heading. -->
+      <section class="block" id="interests">
+        <h2>Interests and hobbies</h2>
+        <div class="two-col">
+          <div>
+           <!--these are the hobbies not related to computer sceince-->
+            <ul class="list">
+              <li>Football </li>
+              <li>Playing FC 25 Ultimate Team </li>
+              <li>Sim Racing Like Grand Turismo and Assetto Corsa</li>
+            </ul>
+          </div>
+          <div>
+          <!--these are hobbies releted to computer sceince-->
+            <ul class="list">
+              <li>Creative web experiments and canvas animations</li>
+              <li>Game modding</li>
+              <li>Collecting design ideas for my next build on Pinterest</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================== E. CAREER ASPIRATIONS (ORDERED LIST) =====================
+           <ol> = ordered list (1, 2, 3...). Use it when the ORDER matters,
+           like steps in a plan. Together with the <ul> above, both list types are used. -->
+      <section class="block" id="aspirations">
+        <h2>Career aspirations</h2>
+        <p>
+          I want to build big things, not just keep systems running. I see a lot of unbuilt potential
+          in Malawi's aviation and financial sectors, and I want to use software to make everyday
+          processes faster, fairer and easier to follow.
+        </p>
+        <h3>My professional development goals</h3>
+        <ol class="list">
+          <li>Graduate in 2027 with a strong Computer Science foundation.</li>
+          <li>If possible i want to keep growing in the Aivialtion Sector and build more systems there.</li>
+          <li>Scale my reconciliation and billing work into tools more organisations can use.</li>
+          <li>Deepen my skills in systems design, databases and security.</li>
+        </ol>
+
+        <!-- DOWNLOAD BUTTON: the "download" attribute makes the browser SAVE the file
+             instead of opening it. Dont forget i should Put your CV in the main folder as blessings.S.Phiri-cv.pdf
+             (lowercase, no spaces, as the brief's naming rules ask). -->
+        <a class="btn" href="blessings.S.Phiri-cv.docx" download="blessings.S.Phiri-CV.docx" style="align-self:flex-start;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19.5h14"/></svg>
+          Download CV
+        </a>
+      </section>
+
+      <!-- ===================== F. CONTACT INFORMATION =====================
+           id="contact" is where the "Contact Me" button on the Home page jumps to. -->
+      <section class="block" id="contact">
+        <h2>Contact information</h2>
+        <p>Want to work together, or just say hi? Reach me here.</p>
+        <div class="contact-list">
+          <!-- EMAIL LINK (brief requirement): href="mailto:address". TODO: use your real email. -->
+          <a href="mailto:blessingsphiri196@com.com"><span>Email</span><span>blessingsphiri196@gmail.com</span></a>
+          <!-- EXTERNAL links to my GitHub and other profiles. TODO: replace YOUR-... -->
+          <a href="https://github.com/ahfinashakerr" target="_blank" rel="noopener"><span>GitHub</span><span>github.com/ahfinashakerr</span></a>
+          <a href="https://www.linkedin.com/in/blessings-phiri-0867732a6?" target="_blank" rel="noopener"><span>LinkedIn</span><span>linkedin.com/in/blessings phiri</span></a>
+          <!--yeah removed slime-->
+          <!-- not a link, just information, so a <div> is used instead of <a> -->
+          <div><span>Phone</span><span>+265 994 401 565</span></div>
+          <!--this is for my location-->  
+          <div><span>Based in</span><span> Lilongwe, Malawi</span></div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Footer: same as every page -->
+    <footer>
+      <hr>
+      <div class="foot-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="animations.html">Animated Concepts</a>
+        <a href="#top">Back to top &uarr;</a>
+      </div>
+      <p>&copy; <span id="year">2026</span> blessings S Phiri &middot; ahfinashakerr</p>
+    </footer>
+
+  </main>
+</body>
+</html>

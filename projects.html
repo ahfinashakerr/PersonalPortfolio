@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+  projects.html  -  the PROJECTS page
+
+  Shows 3 projects so all the projects have the following things:
+    1. a title            4. technologies used
+    2. a description      5. a screenshot / image
+    3. the problem it     6. a clickable GitHub link
+       solves
+  The head, navigation and footer are the same as on the other pages
+  (see index.html for the long explanations).
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Projects by Blessings S Phiri: a payment reconciliation system for the DCA, a photography website for STUNT Photography and  a company brand identity for the Framflow.">
+  <meta name="author" content="blessings S Phiri">
+  <title>blessings S phiri | Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <main class="page" id="top">
+
+    <header>
+      <nav class="pill" aria-label="Main navigation">
+        <div class="tabs">
+          <a href="index.html">home</a>
+          <a href="about.html">about</a>
+          <a href="projects.html" class="active" aria-current="page">projects</a>
+          <a href="animations.html">animated concepts</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- class="wrap wrap-wide": TWO classes on one element. "wrap" centres the content,
+         "wrap-wide" makes it wider so three cards can sit side by side. -->
+    <div class="wrap wrap-wide">
+
+      <div class="page-title">
+        <h1>Selected projects</h1>
+        <p>Things I've built and designed, for my internship and for clients. Each card shows the problem it solves, the tech used and its  link.</p>
+        <div class="btn-row" style="justify-content:flex-start;">
+          <!-- LINK TO MY MAIN GITHUB PROFILE (required by the brief) -->
+          <a class="btn" href="https://github.com/ahfinashakerr" target="_blank" rel="noopener">See all my repositories on GitHub</a>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           EDITTING THE PROJECT CARDS
+           1. Replace images/projectN.jpg with a real screenshot (keep the same file name, or change src).
+           2. Replace YOUR-USERNAME / the repo name with the REAL GitHub link.
+           3. Only list projects you really built yourself (the brief forbids fake or copied ones).
+           ===================================================================== -->
+      <section class="block" aria-label="Project list">
+        <!-- .grid is a CSS Grid: the cards arrange themselves into columns automatically -->
+        <div class="grid project-grid">
+
+          <!-- ---------- PROJECT 1 ----------
+               <article> = a self-contained piece of content (a card).
+               class="reveal" = fades in when scrolled into view (script.js + style.css).
+               "d1", "d2" on the next cards add a small delay so they appear one after another. -->
+          <article class="card reveal">
+            <div class="num">01 / 03</div>
+
+            <!-- CLICKABLE IMAGE #3: the screenshot is inside a link to the GitHub repo -->
+            <a class="shot-link" href="https://github.com/ahfinashakerr/dca-billing" target="_blank" rel="noopener">
+              <img class="shot" src="images/project1.jpg" alt="Screenshot of the Automated Payment Reconciliation System" width="800" height="500">
+            </a>
+
+            <!-- <h3> = the project title (the page's h1 > card's h3 keeps the heading order sensible) -->
+            <h3>Automated Payment Reconciliation System</h3>
+            <p>Built during my internship at the Department of Civil Aviation, with an Airport Direct Submission subsystem so airports can submit invoices online to the DCA.</p>
+
+            <!-- <h5> = small label heading; the paragraph after it answers it -->
+            <h5>Problem it solves</h5>
+            <p>Matching payments against aviation customer statements was slow, manual work in Excel.</p>
+
+            <!-- Technologies used, as small tags -->
+            <div class="tags"><span>TypeScript</span><span>React</span><span>Node.js</span><span>Express</span><span>SQLite</span></div>
+
+            <!-- GitHub link for this project -->
+            <a class="view" href="https://github.com/ahfinashakerr/dca-billing" target="_blank" rel="noopener">View on GitHub</a>
+          </article>
+
+          <!-- ---------- PROJECT 2 ---------- -->
+          <article class="card reveal d1">
+            <div class="num">02 / 03</div>
+            <a class="shot-link" href="https://stuntphotography.vercel.app/" target="_blank" rel="noopener">
+              <img class="shot" src="images/project2.jpg" alt="Screenshot of the Stunt Photography website" width="800" height="500">
+            </a>
+            <h3>Stunt Photography Website</h3>
+            <p>A magazine-style photography site deployed on Vercel, with ongoing work on Google SEO and indexing.</p>
+            <h5>Problem it solves</h5>
+            <p>A photographer needed an online portfolio that looks good and can be found on Google.</p>
+            <div class="tags"><span>React</span><span>Vite</span><span>Vercel</span><span>SEO</span></div>
+            <a class="view" href="https://stuntphotography.vercel.app/" target="_blank" rel="noopener">View website</a>
+          </article>
+
+          <!-- ---------- PROJECT 3 ----------
+               A branding project has no code, so upload your logo and brand files to a
+                (for example "framflow-branding") to make this link real. -->
+          <a class="card reveal d2 framflow-card" href="images/framflow-project-materials.pdf" target="_blank" rel="noopener" aria-label="Open the Framflow company profile and poster PDF">
+            <div class="num">03 / 03</div>
+            <img class="shot" src="images/project3.jpg" alt="Framflow logo and brand identity design" width="800" height="500">
+            <h3>Framflow Company Branding</h3>
+            <p>A logo and brand identity designed for Framflow, an agriculture company.</p>
+            <h5>Problem it solves</h5>
+            <p>The company needed a recognisable, professional identity to stand out and build trust with customers.</p>
+            <div class="tags"><span>Logo design</span><span>Branding</span><span>Visual identity</span></div>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- ===================== SUMMARY TABLE =====================
+           A second table (the brief says "at least one"). Same structure as on the About page. -->
+      <section class="block" aria-label="Project summary table">
+        <h2>At a glance</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Project</th><th scope="col">Type</th><th scope="col">Main Tools Used</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Payment Reconciliation System</td><td>Web system</td><td>TypeScript,CSS & HTML (react)</td></tr>
+              <tr><td>Stunt Photography</td><td>Website</td><td>JavaScript / React</td></tr>
+              <tr><td>Framflow Branding</td><td>Logo and brand identity</td><td>PhotoShop & Adobe animate</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+
+    <footer>
+      <hr>
+      <div class="foot-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="animations.html">Animated Concepts</a>
+        <a href="#top">Back to top &uarr;</a>
+      </div>
+      <p>&copy; <span id="year">2026</span> blessings S Phiri &middot; ahfinashakerr</p>
+    </footer>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,494 @@
+/* =====================================================================
+   style.css  -  the ONE stylesheet used by all four pages
+
+   WHAT IS CSS?
+   HTML says WHAT is on the page (headings, paragraphs, images).
+   CSS says HOW it looks (colours, fonts, spacing, layout, animation).
+   Each page links to this file with:
+       <link rel="stylesheet" href="css/style.css">
+   WHY ONE FILE? So every page looks the same and I only fix a style
+   in one place.
+
+   HOW A CSS RULE IS WRITTEN:
+       selector { property: value; }
+   e.g.  h2 { font-size: 30px; }  means "make every <h2> 30px big".
+
+   TABLE OF CONTENTS
+     1. Variables + basics
+     2. Page layout
+     3. Navigation (pill bar)
+     4. Home hero
+     5. Social dock
+     6. Buttons + tags
+     7. Cards (projects + hover demos)
+     8. Table, lists, contact list
+     9. Animations (keyframes, typing, skill bars, scroll reveal)
+    10. Footer
+    11. Responsive design (tablet + phone)
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. VARIABLES + BASICS
+   ===================================================================== */
+
+/* :root means "the whole page". Variables written here (they start with
+   two dashes) can be reused anywhere with var(--name).
+   WHY: if I want a different grey, I change it ONCE here. */
+:root {
+  --bg: #ececec;                    /* page background grey */
+  --ink: #161616;                   /* near-black used for headings + buttons */
+  --text: #1c1c1c;                  /* normal text colour */
+  --muted: #8a8a8a;                 /* light grey for small / secondary text */
+  --line: #dcdcdc;                  /* thin border lines */
+  --card: rgba(255, 255, 255, 0.72);/* semi-see-through white for cards */
+}
+
+/* box-sizing: border-box makes width include padding + border.
+   WHY: without it, a box with width:100% and padding would be wider than
+   the screen and cause sideways scrolling. The * means "everything". */
+* { box-sizing: border-box; }
+
+/* Smooth scrolling: when a visitor clicks an anchor link such as
+   href="#skills", the page glides there instead of jumping. */
+html { scroll-behavior: smooth; }
+
+/* Styles for the whole visible page */
+body {
+  margin: 0;                                         /* remove the browser's default gap */
+  font-family: 'DM Sans', system-ui, sans-serif;     /* DM Sans from Google Fonts; if it fails, use the device's normal font */
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Links: keep the surrounding text colour and remove the default underline
+   (I add my own nicer underlines where needed). */
+a { color: inherit; text-decoration: none; }
+
+/* Images can never be wider than the space they sit in.
+   WHY: stops big pictures breaking the layout on phones. */
+img { max-width: 100%; }
+
+/* Headings h1 to h6. A shared rule first, then each size is set below.
+   font-weight 300 = light, which gives the thin elegant look. */
+h1, h2, h3, h4, h5, h6 { margin: 0; font-weight: 300; letter-spacing: -0.5px; }
+h2 { font-size: 30px; }
+h3 { font-size: 22px; }
+h4 { font-size: 17px; font-weight: 500; letter-spacing: 0; }
+/* h5 and h6 are small label headings, so they are small, grey and spaced out */
+h5 { font-size: 13px; font-weight: 500; letter-spacing: 0.4px; text-transform: uppercase; color: var(--muted); }
+h6 { font-size: 12px; font-weight: 400; letter-spacing: 0.4px; color: var(--muted); }
+
+/* <hr> = horizontal rule. I replace the heavy default look with a thin line. */
+hr { width: 100%; border: 0; border-top: 1px solid var(--line); margin: 8px 0; }
+
+/* .txt-link = a link inside a paragraph, shown with a thin underline.
+   The underline darkens on hover (:hover = mouse is over it). */
+.txt-link { border-bottom: 1px solid #9a9a9a; color: #1a1a1a; }
+.txt-link:hover { border-bottom-color: #1a1a1a; }
+
+/* :focus-visible = the element was selected with the keyboard (Tab key).
+   WHY: keyboard users need to SEE where they are. This is an accessibility feature. */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+
+/* =====================================================================
+   2. PAGE LAYOUT
+   ===================================================================== */
+
+/* .page wraps everything inside <main>. It is a FLEXBOX column:
+   display:flex with flex-direction:column stacks children top to bottom,
+   and align-items:center centres them horizontally. */
+.page {
+  min-height: 100vh;               /* at least the full screen height (vh = 1% of screen height) */
+  /* soft white glow at the top fading to grey: this is the base site's look */
+  background: radial-gradient(ellipse 70% 40% at 50% 0%, #ffffff 0%, #f3f3f3 55%, #ececec 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 24px 60px;         /* space inside: top, left/right, bottom */
+}
+
+/* .wrap = a centred column that is never wider than 760px.
+   WHY: very long lines of text are tiring to read. */
+.wrap { width: 100%; max-width: 760px; }
+/* .wrap-wide = a wider version, used on the Projects page for the card grid.
+   (It is used together with .wrap, so it just overrides max-width.) */
+.wrap-wide { max-width: 980px; }
+
+/* .block = one section of content on the inner pages. A flex column with a
+   gap between children, and a big margin above to separate sections. */
+.block { display: flex; flex-direction: column; gap: 18px; margin-top: 64px; }
+.block p { margin: 0; line-height: 1.6; font-size: 16px; }   /* line-height 1.6 = comfortable reading */
+
+/* .page-title = big heading area at the top of About / Projects / Animated Concepts */
+.page-title { margin-top: 70px; display: flex; flex-direction: column; gap: 14px; }
+.page-title h1 { font-size: 52px; line-height: 1.08; letter-spacing: -1.5px; }
+.page-title p { margin: 0; color: #555; line-height: 1.6; max-width: 560px; }
+
+
+/* =====================================================================
+   3. NAVIGATION (the pill-shaped bar)
+   ===================================================================== */
+
+/* The <header> holds the nav. position:sticky + top:14px makes it stay
+   14px from the top while scrolling, so visitors can always navigate.
+   z-index:20 keeps it ABOVE the content that scrolls underneath. */
+header { width: 100%; display: flex; justify-content: center; position: sticky; top: 14px; z-index: 20; }
+
+/* .pill = the rounded bar. border-radius 999px makes the ends fully round. */
+.pill {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.7);   /* slightly see-through white */
+  backdrop-filter: blur(8px);             /* blurs whatever is behind the bar (frosted glass) */
+  font-size: 12px;
+  color: #555;
+}
+
+/* .tabs = the row of links inside the pill */
+.tabs { display: flex; align-items: center; gap: 16px; padding: 6px 0; }
+.tabs a { color: var(--muted); font-weight: 400; transition: color 0.15s; position: relative; }
+.tabs a:hover { color: #111; }                         /* hover: link gets darker */
+.tabs a.active { color: #111; font-weight: 500; }      /* the page you are on is dark + bolder */
+
+/* HOVER EFFECT: an underline that grows from the left.
+   ::after creates a fake extra element after each link (no extra HTML needed).
+   It is 1px tall and starts squashed to nothing (scaleX(0)).
+   On hover / active it stretches to full width (scaleX(1)); "transition"
+   animates that change over 0.25 seconds. */
+.tabs a::after {
+  content: '';
+  position: absolute; left: 0; bottom: -3px;
+  width: 100%; height: 1px; background: #111;
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+.tabs a:hover::after, .tabs a.active::after { transform: scaleX(1); }
+
+
+/* =====================================================================
+   4. HOME HERO (the big intro at the top of index.html)
+   ===================================================================== */
+
+/* position:relative so the ::before background below can be placed
+   inside this box. overflow:hidden keeps the image inside the rounded corners. */
+.hero {
+  position: relative;
+  margin-top: 70px;
+  width: 100%;
+  max-width: 900px;
+  padding: 50px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;               /* even space between the stacked items */
+  text-align: center;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+/* BACKGROUND IMAGE (brief requirement): drawn with ::before so it sits
+   behind the text. z-index:-1 puts it at the back. inset:0 stretches it
+   over the whole hero. "cover" fills the box without stretching the picture.
+   The mask fades the picture out toward the edges so it blends softly. */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: -1;
+  background: url('../images/background.jpg') center / cover no-repeat;   /* ../ = go up out of the css folder, then into images */
+  opacity: 0.5;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);   /* -webkit- is for Safari/older Chrome */
+          mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
+}
+
+/* Profile photo: a circle (border-radius 50%). object-fit:cover crops the
+   photo to fill the circle instead of squashing it. */
+.avatar {
+  display: block; width: 96px; height: 96px; border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12);
+  transition: transform 0.25s ease;
+}
+/* hover: photo grows a bit and tilts a little */
+.avatar:hover { transform: scale(1.08) rotate(-3deg); }
+
+.name { font-size: 15px; color: #222; }
+
+/* The big headline */
+.hero h1 {
+  margin: 14px 0 0;
+  font-size: 62px;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  color: #141414;
+}
+/* The little layers icon sits in the text line, nudged down to line up */
+.layers { vertical-align: -6px; }
+
+/* Typing line under the name. min-height stops the page jumping while text is typed/deleted. */
+.typing { font-size: 20px; color: #444; min-height: 30px; }
+/* .typed gets a right border that acts as the blinking cursor (see @keyframes blink) */
+.typing .typed { border-right: 2px solid #161616; padding-right: 4px; animation: blink 0.8s step-end infinite; }
+
+.welcome { max-width: 540px; margin: 0; line-height: 1.6; color: #444; font-size: 16px; }
+.hero-meta { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+
+
+/* =====================================================================
+   5. SOCIAL DOCK (row of app-style icons, kept from the base site)
+   ===================================================================== */
+
+/* flex-wrap:wrap lets icons drop onto a second row on small screens */
+.dock {
+  margin-top: 60px;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 10px; max-width: 100%;
+  padding: 9px 10px;
+  border-radius: 22px;
+  background: linear-gradient(#f7f7f7, #e9e9e9);   /* light grey top-to-bottom gradient */
+  /* two shadows: a soft drop shadow outside + a thin white line inside (inset) */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+.dock-sep { width: 1px; height: 38px; background: #cfcfcf; margin: 0 4px; }  /* thin divider between icon groups */
+
+/* each icon is a rounded square; flex centres the icon inside */
+.dock-i {
+  width: 52px; height: 52px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.18s ease;
+}
+/* HOVER: icon jumps up and grows (like the Mac dock) */
+.dock-i:hover { transform: translateY(-6px) scale(1.14); }
+
+/* Brand colour for each icon. Class names match the class in the HTML. */
+.linkedin      { background: #0a66c2; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+.mail          { background: linear-gradient(180deg, #3fa9ff 0%, #0a6cf0 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
+/* i removed one another thing */
+.github        { background: #161b22; box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+.x             { background: #000; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+.youtube       { background: #fff; box-shadow: inset 0 0 0 1px rgba(0,0,0,.1); }
+.instagram     { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }
+
+
+/* =====================================================================
+   6. BUTTONS + TAGS
+   ===================================================================== */
+
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 8px; }
+
+/* .btn = the solid black pill button (call-to-action) */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 44px; padding: 0 22px;
+  border-radius: 999px;
+  background: var(--ink); color: #fff;
+  font-size: 14px; font-weight: 500;
+  border: 1px solid var(--ink);
+  /* "transition" = animate these properties smoothly when they change */
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+/* HOVER: button lifts 2px, goes a bit lighter and gets a shadow */
+.btn:hover { background: #333; transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.18); }
+
+/* .btn.ghost = the outline version (both classes on the same element) */
+.btn.ghost { background: transparent; color: var(--ink); border-color: #bdbdbd; }
+.btn.ghost:hover { background: #fff; }
+
+/* .tags = little grey pills listing technologies / interests */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { font-size: 12px; padding: 4px 10px; border-radius: 999px; background: #e6e6e6; color: #444; }
+
+
+/* =====================================================================
+   7. CARDS (project cards + hover demo cards)
+   ===================================================================== */
+
+/* CSS GRID: repeat(auto-fill, minmax(290px, 1fr)) means
+   "make as many columns as fit, each at least 290px wide, sharing space equally".
+   WHY: gives 3 columns on desktop, 2 on tablet, 1 on phone with NO extra code. */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 22px; }
+
+.card {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: 22px;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: inset 0 0 0 1px #dedede;     /* inset shadow = a thin inner border */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+/* HOVER EFFECT (brief): the card rises, slightly enlarges and the shadow grows */
+.card:hover { transform: translateY(-6px) scale(1.015); box-shadow: inset 0 0 0 1px #cfcfcf, 0 16px 34px rgba(0,0,0,.12); }
+.card p { margin: 0; font-size: 14.5px; line-height: 1.55; color: #444; }
+.card .num { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; }
+
+/* The screenshot sits inside a link (.shot-link) so the IMAGE is clickable.
+   overflow:hidden crops the image when it zooms on hover. */
+.shot-link { display: block; overflow: hidden; border-radius: 12px; background: #ddd; }
+.shot { display: block; width: 100%; height: 160px; object-fit: cover; transition: transform 0.4s ease; }
+/* when the mouse is over the CARD, the image inside zooms in */
+.card:hover .shot { transform: scale(1.07); }
+
+/* Project screenshots should show the whole image rather than crop or zoom it.
+   This is scoped to the Projects page grid so the zoom demonstration on the
+   Animated Concepts page still works as intended. */
+.project-grid .shot { object-fit: contain; background: #f4f4f4; }
+.project-grid .card:hover .shot { transform: none; }
+.framflow-card { cursor: pointer; }
+
+/* "View on GitHub" link. margin-top:auto pushes it to the bottom of the card
+   so links line up even when descriptions have different lengths. */
+.card .view { margin-top: auto; align-self: flex-start; font-size: 14px; border-bottom: 1px solid #9a9a9a; }
+.card .view:hover { border-bottom-color: #111; }
+
+
+/* =====================================================================
+   8. TABLE, LISTS, CONTACT LIST
+   ===================================================================== */
+
+/* .table-wrap lets the table scroll sideways on small phones instead of breaking the page */
+.table-wrap { overflow-x: auto; border-radius: 16px; box-shadow: inset 0 0 0 1px #dedede; background: var(--card); }
+#education .table-wrap {
+  width: min(860px, calc(100vw - 48px));
+  align-self: center;
+}
+table { width: 100%; border-collapse: collapse; font-size: 15px; }   /* collapse = one line between cells, not double */
+caption { text-align: left; padding: 14px 16px 0; color: var(--muted); font-size: 13px; }
+th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid #e2e2e2; }
+th { font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); }
+tbody tr { transition: background 0.15s; }
+tbody tr:hover { background: rgba(255,255,255,.9); }     /* row highlights on hover */
+tbody tr:last-child td { border-bottom: 0; }              /* no line under the last row */
+
+/* Lists (<ul> bullets and <ol> numbers). padding-left makes room for the markers. */
+.list { margin: 0; padding-left: 22px; line-height: 1.8; font-size: 16px; }
+.list li::marker { color: var(--muted); }                 /* colours the bullet / number */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }   /* two equal columns */
+
+/* Contact rows: label on the left, value on the right (justify-content: space-between) */
+.contact-list { display: flex; flex-direction: column; border-top: 1px solid #d9d9d9; }
+.contact-list > * {                                       /* > * = every direct child */
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 16px 0; border-bottom: 1px solid #d9d9d9; font-size: 16px;
+}
+.contact-list > * > :first-child { color: var(--muted); }
+.contact-list a:hover span:last-child { border-bottom: 1px solid #111; }
+
+/* Small "jump to section" links under the About title */
+.jump { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); }
+.jump a:hover { color: #111; }
+
+
+/* =====================================================================
+   9. ANIMATIONS
+   ===================================================================== */
+
+/* @keyframes describes an animation. Here "blink" makes the typing cursor
+   disappear at the half-way point, then come back. */
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* "fade-up" = start invisible and 18px lower, end normal. Used on the hero. */
+@keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* PAGE-LOAD ANIMATION: every child of the hero fades up.
+   "both" keeps the starting style before it begins and the ending style after.
+   Each child gets a slightly longer delay so they appear one after another. */
+.hero > * { animation: fade-up 0.7s ease both; }
+.hero > *:nth-child(2) { animation-delay: 0.08s; }
+.hero > *:nth-child(3) { animation-delay: 0.16s; }
+.hero > *:nth-child(4) { animation-delay: 0.24s; }
+.hero > *:nth-child(5) { animation-delay: 0.32s; }
+.hero > *:nth-child(6) { animation-delay: 0.4s; }
+
+/* Big typing text on the Animated Concepts page (same cursor trick as the hero) */
+.typing-demo { font-size: 34px; font-weight: 300; letter-spacing: -0.8px; min-height: 52px; }
+.typing-demo .typed { border-right: 3px solid #161616; padding-right: 4px; animation: blink 0.8s step-end infinite; }
+
+/* "Hidden info" hover card: a black panel waits just below the card
+   (translateY(100%) = pushed down by its own height, hidden by overflow:hidden).
+   On hover it slides up into view. */
+.reveal-card { position: relative; overflow: hidden; min-height: 150px; }
+.reveal-card .extra {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 16px 22px; background: var(--ink); color: #fff;
+  font-size: 14px; line-height: 1.5;
+  transform: translateY(100%); transition: transform 0.3s ease;
+}
+.reveal-card:hover .extra { transform: translateY(0); }
+
+/* SKILL BARS. .bar is the grey track; the <span> inside is the black fill.
+   The fill starts at width 0. JavaScript sets the real width (from data-level)
+   when the bar is on screen, and "transition: width" makes it grow smoothly. */
+.skill { display: flex; flex-direction: column; gap: 8px; }
+.skill-top { display: flex; justify-content: space-between; font-size: 14px; }
+.skill-top span:last-child { color: var(--muted); }
+.bar { height: 8px; border-radius: 999px; background: #e0e0e0; overflow: hidden; }
+.bar span {
+  display: block; height: 100%; width: 0;
+  border-radius: 999px; background: var(--ink);
+  transition: width 1.4s cubic-bezier(0.22, 0.8, 0.3, 1);   /* cubic-bezier = custom easing: fast start, gentle stop */
+}
+
+/* SCROLL REVEAL (used on the Projects cards). Elements with class "reveal"
+   start invisible and 26px low; when JavaScript adds "visible" they fade in
+   and slide up. The ".js" part means these hidden styles ONLY apply if
+   JavaScript is running, so if JS fails the content is still visible. */
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.js .reveal.visible { opacity: 1; transform: none; }
+/* d1, d2, d3 add a small delay so neighbouring cards appear one after another */
+.js .reveal.d1 { transition-delay: 0.1s; }
+.js .reveal.d2 { transition-delay: 0.2s; }
+.js .reveal.d3 { transition-delay: 0.3s; }
+
+/* ACCESSIBILITY: some people set their device to "reduce motion" (motion can
+   make them dizzy). This media query switches all animation off for them. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal { opacity: 1; transform: none; }
+}
+
+
+/* =====================================================================
+   10. FOOTER
+   ===================================================================== */
+
+footer {
+  width: 100%; max-width: 760px; margin-top: 90px;
+  display: flex; flex-direction: column; gap: 14px;
+  font-size: 13px; color: var(--muted); text-align: center;
+}
+footer .foot-links { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
+footer a:hover { color: #111; }
+
+
+/* =====================================================================
+   11. RESPONSIVE DESIGN
+   A @media rule only applies when the screen matches the condition.
+   max-width: 800px means "screens 800px wide or narrower" (tablets).
+   WHY: the site must work on phones, tablets and computers (brief requirement).
+   ===================================================================== */
+
+/* ---- Tablet ---- */
+@media (max-width: 800px) {
+  .two-col { grid-template-columns: 1fr; }     /* two columns become one */
+  .page-title h1 { font-size: 42px; }
+  #education .table-wrap { width: 100%; }
+}
+
+/* ---- Phone ---- */
+@media (max-width: 600px) {
+  .page { padding: 16px 16px 50px; }
+  .hero { margin-top: 40px; padding-top: 30px; }
+  .hero h1 { font-size: 40px; }               /* smaller headline so it fits */
+  .layers { width: 34px; height: 34px; }
+  .typing { font-size: 17px; }
+  .typing-demo { font-size: 24px; }
+  .page-title { margin-top: 44px; }
+  .page-title h1 { font-size: 34px; }
+  .block { margin-top: 48px; }
+  .tabs { gap: 12px; flex-wrap: wrap; justify-content: center; }   /* nav links may wrap to 2 lines */
+  .dock { margin-top: 40px; }
+}
