@@ -1,34 +1,13 @@
 // =====================================================================
 // script.js  -  JavaScript used by all four pages
 //
-// WHAT IS JAVASCRIPT?
-// HTML = structure, CSS = looks, JavaScript = behaviour (things that
-// happen while the visitor is on the page).
-// The pages load this file with:
-//     <script src="js/script.js" defer></script>
-// "defer" means: wait until the HTML is fully read, THEN run this file.
-// WHY: the script needs the elements to exist before it can find them.
-//
-// One file serves every page. Each feature first checks "does this
-// element exist on this page?" so there are no errors on pages that
-// don't have it.
-//
+// 
 // CONTENTS
-//   1. Tell the CSS that JavaScript works
-//   2. Typing animation
-//   3. Scroll reveal
-//   4. Animated skill bars
-//   5. Footer year
-// =====================================================================
-
-
-// ---------------------------------------------------------------
-// 1. TELL THE CSS THAT JAVASCRIPT WORKS
-// document.documentElement is the <html> tag. classList.add puts the
-// class "js" on it.
-// WHY: in style.css the "hide until revealed" rule only applies under
-// ".js". So if JavaScript is blocked or fails, nothing stays hidden.
-// ---------------------------------------------------------------
+//   
+//   1. Typing animation
+//   2. Scroll reveal
+//   3. Animated skill bars
+//   4. Footer year 
 document.documentElement.classList.add('js');
 
 

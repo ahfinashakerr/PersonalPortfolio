@@ -1,17 +1,6 @@
-/* =====================================================================
+/* 
    style.css  -  the ONE stylesheet used by all four pages
 
-   WHAT IS CSS?
-   HTML says WHAT is on the page (headings, paragraphs, images).
-   CSS says HOW it looks (colours, fonts, spacing, layout, animation).
-   Each page links to this file with:
-       <link rel="stylesheet" href="css/style.css">
-   WHY ONE FILE? So every page looks the same and I only fix a style
-   in one place.
-
-   HOW A CSS RULE IS WRITTEN:
-       selector { property: value; }
-   e.g.  h2 { font-size: 30px; }  means "make every <h2> 30px big".
 
    TABLE OF CONTENTS
      1. Variables + basics
@@ -25,12 +14,12 @@
      9. Animations (keyframes, typing, skill bars, scroll reveal)
     10. Footer
     11. Responsive design (tablet + phone)
-   ===================================================================== */
+   /
 
 
-/* =====================================================================
-   1. VARIABLES + BASICS
-   ===================================================================== */
+/* 
+   1. VARIABLES and  BASICS
+    */
 
 /* :root means "the whole page". Variables written here (they start with
    two dashes) can be reused anywhere with var(--name).
